@@ -3,7 +3,15 @@ import 'package:quizflutter/constants/app_routes.dart';
 import 'package:quizflutter/models/authentication_result.dart';
 import 'package:quizflutter/providers/authentication_provider.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
+  @override
+  State createState() {
+    return RegisterScreenState();
+  }
+}
+class RegisterScreenState extends State<RegisterScreen> {
   final AuthenticationProvider authenticationProvider = AuthenticationProvider();
 
   final TextEditingController usernameEditController = TextEditingController();
@@ -11,7 +19,14 @@ class RegisterScreen extends StatelessWidget {
   final TextEditingController passwordEditController = TextEditingController();
   final TextEditingController passwordConfirmController = TextEditingController();
 
-  RegisterScreen({super.key});
+  late AuthenticationResult authenticationResult;
+
+
+  @override
+  void initState() {
+    authenticationResult = AuthenticationResult(success: false);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +86,40 @@ class RegisterScreen extends StatelessWidget {
                 }
                 final AuthenticationResult result =
                 await authenticationProvider.signup(username, email, password);
+                authenticationResult = result;
+                // if (result.success) {
+                //   Navigator.pushReplacementNamed(
+                //       context, AppRoutes.login.toString());
+                // } else {
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //     SnackBar(
+                //       content: Text(result.errorMessage),
+                //     ),
+                //   );
+                // }
                 if (result.success) {
-                  Navigator.pushReplacementNamed(
-                      context, AppRoutes.login.toString());
+                  showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog (
+                    title: const Text('Registration Successfully'),
+                    content: const Text('Please activate your account through activate link sent to your email account.'),
+                    actions: <Widget>[
+                      // TextButton(
+                      //   onPressed: () => Navigator.pop(context, 'Cancel'),
+                      //   child: const Text('Cancel'),
+                      // ),
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('OK'),
+                      ),
+                      TextButton(onPressed: () => {
+                        Navigator.pop(context),
+                        Navigator.pushReplacementNamed(
+                              context, AppRoutes.login.toString()),
+
+                      }, child: const Text('Back to login Page'))
+                    ],
+                  ));
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(

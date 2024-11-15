@@ -63,6 +63,8 @@ class AuthenticationProvider with ChangeNotifier {
 
       await saveAccessToken(accessToken);
       return AuthenticationResult(success: true);
+    } else if (response.statusCode == 403) {
+      return AuthenticationResult(success: false, errorMessage: "Your account might has not been enabled");
     } else {
       const errMsg = 'Authentication failed. Your email or password might incorrect';
       return AuthenticationResult(success: false, errorMessage: errMsg);
