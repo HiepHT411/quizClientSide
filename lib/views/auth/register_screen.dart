@@ -3,6 +3,8 @@ import 'package:quizflutter/constants/app_routes.dart';
 import 'package:quizflutter/models/authentication_result.dart';
 import 'package:quizflutter/providers/authentication_provider.dart';
 
+import '../../components/AppRouting.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -113,9 +115,10 @@ class RegisterScreenState extends State<RegisterScreen> {
                         child: const Text('OK'),
                       ),
                       TextButton(onPressed: () => {
-                        Navigator.pop(context),
-                        Navigator.pushReplacementNamed(
-                              context, AppRoutes.login.toString()),
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const RoutingApp()))
+                        // Navigator.pop(context),
+                        // Navigator.pushReplacementNamed(
+                        //       context, AppRoutes.login.toString()),
 
                       }, child: const Text('Back to login Page'))
                     ],

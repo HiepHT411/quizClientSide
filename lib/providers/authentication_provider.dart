@@ -13,9 +13,10 @@ class AuthenticationProvider with ChangeNotifier {
   String accessToken = '';
   final String accTokenKey = 'accessToken';
 
-  Future<void> saveAccessToken(String token) async {
+  Future<void> saveAccessToken(String token, String email) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(accTokenKey, token);
+    await prefs.setString("email", email);
   }
 
   Future<String> get getAccessToken async {
@@ -61,7 +62,7 @@ class AuthenticationProvider with ChangeNotifier {
       final token = jsonDecode(response.body)['accessToken'];
       accessToken = token;
 
-      await saveAccessToken(accessToken);
+      await saveAccessToken(accessToken, email);
       return AuthenticationResult(success: true);
     } else if (response.statusCode == 403) {
       return AuthenticationResult(success: false, errorMessage: "Your account might has not been enabled");

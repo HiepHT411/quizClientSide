@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quizflutter/constants/app_routes.dart';
 import 'package:quizflutter/models/authentication_result.dart';
@@ -46,7 +45,7 @@ class LoginScreen extends StatelessWidget {
 
                 if (result.success) {
                   Navigator.pushReplacementNamed(
-                      context, AppRoutes.quizList.toString());
+                      context, AppRoutes.home.toString());//AppRoutes.quizList.toString());
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(

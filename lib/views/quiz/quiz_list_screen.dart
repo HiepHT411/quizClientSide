@@ -37,6 +37,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quiz List'),
+        leading: ElevatedButton(onPressed: (){Navigator.pop(context);}, child: const Icon(Icons.arrow_back)),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),

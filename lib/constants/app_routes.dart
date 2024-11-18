@@ -1,4 +1,5 @@
 class AppRoutes {
+  static const String home = 'home';
   static const String login = 'login';
   static const String register = 'register';
   static const String quizList = 'quizList';
@@ -8,4 +9,5 @@ class AppRoutes {
   static const String questionForm = 'questionForm';
   static const String quizResult = 'quizResult';
   static const String quizReview = 'quizReview';
+  static const String chatPlatform = 'chatPlatform';
 }
