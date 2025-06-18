@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizflutter/constants/app_routes.dart';
 import 'package:quizflutter/utility/notifier.dart';
+import 'package:quizflutter/views/auth/login_screen.dart';
 import 'package:quizflutter/views/home.dart';
 
 void main() {
@@ -23,7 +24,11 @@ class _MyAppState extends State<MyApp> {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'HoangHiep',
-            initialRoute: AppRoutes.login,
+            initialRoute: AppRoutes.home,
+            routes: {
+              AppRoutes.login: (context) => LoginScreen(),
+              AppRoutes.home: (context) => const Home(title: 'Welcome'),
+            },
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(
                   seedColor: Colors.deepPurpleAccent,

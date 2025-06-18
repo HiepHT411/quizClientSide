@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:quizflutter/components/hero_widget.dart';
 import 'package:quizflutter/views/setting_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -15,8 +16,12 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return const Padding(
+      padding: EdgeInsets.all(20.0),
+      child: Column(
+        children: [HeroWidget()],
+      ),
+    );
   }
   
 }

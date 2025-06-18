@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:quizflutter/components/hero_widget.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key, required this.title});
@@ -88,7 +89,7 @@ class SettingPageState extends State<SettingPage> {
                       height: 200,
                       width: double.infinity,
                       color: Colors.white12,
-                      child: Image.asset('assets/images/questionmark.jpg'))),
+                      child: const HeroWidget())),
               ElevatedButton(
                   onPressed: () {}, child: Text('default elevated button')),
               ElevatedButton(

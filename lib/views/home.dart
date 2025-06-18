@@ -1,7 +1,12 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:quizflutter/components/AppRouting.dart';
+import 'package:quizflutter/components/hero_widget.dart';
 import 'package:quizflutter/components/navbar_widget.dart';
+import 'package:quizflutter/constants/app_routes.dart';
 import 'package:quizflutter/utility/notifier.dart';
+import 'package:quizflutter/views/auth/login_screen.dart';
 import 'package:quizflutter/views/profile.dart';
 import 'package:quizflutter/views/quiz/quiz_list_screen.dart';
 import 'package:quizflutter/views/setting_page.dart';
@@ -31,7 +36,6 @@ class Home extends StatefulWidget {
         ),
         leading: const Icon(Icons.notification_add, color: Colors.amber,),
       ),
-
       floatingActionButton: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -138,17 +142,30 @@ class HomeState extends State<Home> {
         ListTile(
           title: const Text('Setting'),
           onTap: () {
-            if (username.isEmpty) {
+            if (username.isNotEmpty) {
               Navigator.push(context,  //pushReplacement will remove previous page so we can not pop back
                   MaterialPageRoute(
-                    builder: (context) => SettingPage( title: 'Settings',)
+                    builder: (context) => const SettingPage( title: 'Settings',)
                   ));
             } else {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const RoutingApp()));
             }
           },
-        )
+        ),
+            ListTile(
+              title: const Text('Logout'),
+              onTap: () {
+                if (username.isNotEmpty) {
+                  Navigator.pushReplacementNamed(
+                      context, AppRoutes.login);
+                  // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  LoginScreen()));
+                } else {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const RoutingApp()));
+                }
+              },
+            )
       ])),
       body: SingleChildScrollView(
         child: Column(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizflutter/components/hero_widget.dart';
 import 'package:quizflutter/constants/app_routes.dart';
 import 'package:quizflutter/models/authentication_result.dart';
 import 'package:quizflutter/providers/authentication_provider.dart';
@@ -21,6 +22,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const HeroWidget(),
                 TextField(
                   controller: emailEditController,
                   decoration: const InputDecoration(
