@@ -153,7 +153,7 @@ class HomeState extends State<Home> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Center(child: Text('Welcome ')),
+            const Center(child: Text('Welcome ')),
             ValueListenableBuilder(
               valueListenable: selectedPageNotifier,
               builder: (context, selectedPage, child) {
