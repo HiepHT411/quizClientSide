@@ -1,12 +1,22 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
-class ProfilePage extends StatelessWidget {
+import 'package:flutter/cupertino.dart';
+import 'package:quizflutter/views/setting_page.dart';
+
+class ProfilePage extends StatefulWidget {
+
   const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text('hehee'),);
+  State<ProfilePage> createState() {
+    return _ProfilePageState();
   }
+}
 
+class _ProfilePageState extends State<ProfilePage> {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
+  
 }

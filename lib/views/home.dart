@@ -4,10 +4,11 @@ import 'package:quizflutter/components/navbar_widget.dart';
 import 'package:quizflutter/utility/notifier.dart';
 import 'package:quizflutter/views/profile.dart';
 import 'package:quizflutter/views/quiz/quiz_list_screen.dart';
+import 'package:quizflutter/views/setting_page.dart';
 import 'package:quizflutter/views/websocket/chat_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-List<Widget> pages = [const ProfilePage(), const ProfilePage()];
+List<Widget> pages = [const QuizListScreen(), const ProfilePage()];
 
 class Home extends StatefulWidget {
   final String title;
@@ -133,17 +134,34 @@ class HomeState extends State<Home> {
             }
           },
           trailing: const Text('realtime'),
+        ),
+        ListTile(
+          title: const Text('Setting'),
+          onTap: () {
+            if (username.isEmpty) {
+              Navigator.push(context,  //pushReplacement will remove previous page so we can not pop back
+                  MaterialPageRoute(
+                    builder: (context) => SettingPage( title: 'Settings',)
+                  ));
+            } else {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const RoutingApp()));
+            }
+          },
         )
       ])),
-      body: Column(
-        children: [
-          Center(child: Text('Welcome $username to Quiz Flutter')),
-          ValueListenableBuilder(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Center(child: Text('Welcome ')),
+            ValueListenableBuilder(
               valueListenable: selectedPageNotifier,
               builder: (context, selectedPage, child) {
                 return pages.elementAt(selectedPage);
-              }),
-        ],
+              },
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: const NavbarWidget(),
     );

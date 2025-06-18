@@ -1,4 +1,4 @@
-const String API_URL = 'http://127.0.0.1:3000/api';
+const String API_URL = 'http://10.0.2.2:3000/api'; // default android studio host
 
 class ApiEndpoint {
   static const String loginEndpoint = '/auth/authenticate';
