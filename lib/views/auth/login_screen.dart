@@ -34,6 +34,7 @@ class LoginPageState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double widthScreen = MediaQuery.of(context).size.width; // get device's screen size
     return Scaffold(
         // appBar: AppBar(
         //     leading: BackButton(onPressed: (){Navigator.pop(context);}),
@@ -42,57 +43,63 @@ class LoginPageState extends State<LoginScreen> {
             child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // const HeroWidget(),
-                Lottie.asset('assets/animations/login.json', height: 300),
-                const FittedBox(
-                  child: Text('Easy English',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 45.0,
-                          letterSpacing: 18)),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextField(
-                  controller: emailEditController,
-                  decoration: InputDecoration(
-                      hintText: 'Email',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15))),
-                ),
-                const SizedBox(height: 10.0),
-                TextField(
-                  controller: passwordEditController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      hintText: 'Password',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15))),
-                ),
-                const SizedBox(height: 10.0),
-                ElevatedButton(
-                  onPressed: () async {
-                    onLoginPress();
-                  },
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 40.0)),
-                  child: const Text('Login'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(
-                        context, AppRoutes.register);
-                  },
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 40.0)),
-                  child: const Text('Create an account'),
-                ),
-              ],
-            ),
+            child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return FractionallySizedBox(
+                    widthFactor: widthScreen > 500 ? 0.5 : 0.8,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // const HeroWidget(),
+                        Lottie.asset('assets/animations/login.json', height: 300),
+                        const FittedBox(
+                          child: Text('Easy English',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 45.0,
+                                  letterSpacing: 18)),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextField(
+                          controller: emailEditController,
+                          decoration: InputDecoration(
+                              hintText: 'Email',
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                        ),
+                        const SizedBox(height: 10.0),
+                        TextField(
+                          controller: passwordEditController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                              hintText: 'Password',
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                        ),
+                        const SizedBox(height: 10.0),
+                        ElevatedButton(
+                          onPressed: () async {
+                            onLoginPress();
+                          },
+                          style: ElevatedButton.styleFrom(
+                              minimumSize: const Size(double.infinity, 40.0)),
+                          child: const Text('Login'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, AppRoutes.register);
+                          },
+                          style: ElevatedButton.styleFrom(
+                              minimumSize: const Size(double.infinity, 40.0)),
+                          child: const Text('Create an account'),
+                        ),
+                      ],
+                    ),
+                  );
+                })
           ),
         )));
   }

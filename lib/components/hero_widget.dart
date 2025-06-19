@@ -26,10 +26,12 @@ class HeroWidgetState extends State<HeroWidget> {
         children: [
           Hero(
         tag: 'hero1',
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: Image.asset('assets/images/bg.png', color: Colors.green, colorBlendMode: BlendMode.darken,),
-        )),
+        child: AspectRatio(
+            aspectRatio: 1920/1080,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Image.asset('assets/images/bg.png', fit: BoxFit.cover, color: Colors.green, colorBlendMode: BlendMode.darken,),
+        ))),
           FittedBox(
             child: Text(
               widget.title!,
