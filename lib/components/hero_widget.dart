@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class HeroWidget extends StatefulWidget {
-  HeroWidget({super.key, required this.title});
+  HeroWidget({super.key, required this.title, this.nextPage});
 
   String? title;
+  final String? nextPage;
 
   @override
   State<StatefulWidget> createState() {
@@ -15,7 +16,12 @@ class HeroWidgetState extends State<HeroWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return GestureDetector(
+      onTap: widget.nextPage != null ? () {
+        Navigator.pushNamed(
+            context, widget.nextPage!);
+      } : null,
+      child: Stack(
       alignment: Alignment.center,
         children: [
           Hero(
@@ -36,6 +42,6 @@ class HeroWidgetState extends State<HeroWidget> {
             ),
           )
       ]
-    );
+    ));
   }
 }

@@ -5,6 +5,8 @@ import 'package:quizflutter/utility/notifier.dart';
 import 'package:quizflutter/views/auth/login_screen.dart';
 import 'package:quizflutter/views/auth/register_screen.dart';
 import 'package:quizflutter/views/home.dart';
+import 'package:quizflutter/views/onboarding_page.dart';
+import 'package:quizflutter/views/quiz/quiz_list_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -44,7 +46,8 @@ class _MyAppState extends State<MyApp> {
             routes: {
               AppRoutes.login: (context) => const LoginScreen(),
               AppRoutes.home: (context) => const Home(title: 'Welcome'),
-              AppRoutes.register: (context) => const RegisterScreen()
+              AppRoutes.register: (context) => const RegisterScreen(),
+              AppRoutes.quizList: (context) => const QuizListScreen()
             },
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(

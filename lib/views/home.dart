@@ -8,13 +8,14 @@ import 'package:quizflutter/constants/app_routes.dart';
 import 'package:quizflutter/constants/constants.dart';
 import 'package:quizflutter/utility/notifier.dart';
 import 'package:quizflutter/views/auth/login_screen.dart';
+import 'package:quizflutter/views/onboarding_page.dart';
 import 'package:quizflutter/views/profile.dart';
 import 'package:quizflutter/views/quiz/quiz_list_screen.dart';
 import 'package:quizflutter/views/setting_page.dart';
 import 'package:quizflutter/views/websocket/chat_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-List<Widget> pages = [const ProfilePage(), const ProfilePage()];
+List<Widget> pages = [const OnboardingPage(), const ProfilePage()];
 
 class Home extends StatefulWidget {
   final String title;

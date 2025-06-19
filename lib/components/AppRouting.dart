@@ -6,6 +6,8 @@ import 'package:quizflutter/models/quiz.dart';
 import 'package:quizflutter/providers/result_calculator.dart';
 import 'package:quizflutter/views/auth/login_screen.dart';
 import 'package:quizflutter/views/auth/register_screen.dart';
+import 'package:quizflutter/views/onboarding_page.dart';
+import 'package:quizflutter/views/profile.dart';
 import 'package:quizflutter/views/question/question_detail_screen.dart';
 import 'package:quizflutter/views/question/question_form_screen.dart';
 import 'package:quizflutter/views/quiz/quiz_detail_screen.dart';
@@ -13,6 +15,7 @@ import 'package:quizflutter/views/quiz/quiz_list_screen.dart';
 import 'package:quizflutter/views/quiz/quiz_play_screen.dart';
 import 'package:quizflutter/views/quiz/quiz_result_screen.dart';
 import 'package:quizflutter/views/quiz/quiz_review_screen.dart';
+import 'package:quizflutter/views/setting_page.dart';
 import 'package:quizflutter/views/websocket/chat_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -84,6 +87,12 @@ class RoutingApp extends StatelessWidget {
           case AppRoutes.chatPlatform:
             loadUsername();
             return MaterialPageRoute(builder: (context) => ChatPage(title: "Chatting Platform", username: username));
+          case AppRoutes.setting:
+            return MaterialPageRoute(builder: (context) => const SettingPage(title: "Setting"));
+          case AppRoutes.profile:
+            return MaterialPageRoute(builder: (context) => const ProfilePage());
+          case AppRoutes.onboarding:
+            return MaterialPageRoute(builder: (context) => const OnboardingPage());
           default:
             return MaterialPageRoute(builder: (context) => LoginScreen());
         }

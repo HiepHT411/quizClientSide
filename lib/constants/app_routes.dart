@@ -10,4 +10,7 @@ class AppRoutes {
   static const String quizResult = 'quizResult';
   static const String quizReview = 'quizReview';
   static const String chatPlatform = 'chatPlatform';
+  static const String setting = 'setting';
+  static const String profile = 'profile';
+  static const String onboarding = 'onboarding';
 }

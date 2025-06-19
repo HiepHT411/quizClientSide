@@ -13,3 +13,10 @@ class Constants {
     fontSize: 16.0
   );
 }
+
+class Headers {
+  static const String keyConcepts = 'Key Concepts';
+  static const String basicLayout = 'Basic Layout';
+  static const String cleanUI = 'Clean UI';
+  static const String fixBugs = 'Fix bugs';
+}

@@ -39,6 +39,8 @@ dependencies:
   http: ^1.2.2
   web_socket_channel: ^2.3.0
   lottie: ^3.2.0
+  # change app launcher icon: 'dart run flutter_launcher_icons:generate' then edit flutter_launcher_icons.yaml
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
