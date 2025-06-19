@@ -3,74 +3,117 @@ import 'package:quizflutter/components/hero_widget.dart';
 import 'package:quizflutter/constants/app_routes.dart';
 import 'package:quizflutter/models/authentication_result.dart';
 import 'package:quizflutter/providers/authentication_provider.dart';
+import 'package:lottie/lottie.dart';
+import 'package:quizflutter/views/home.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return LoginPageState();
+  }
+}
+
+class LoginPageState extends State<LoginScreen> {
   final AuthenticationProvider authProvider = AuthenticationProvider();
 
   final TextEditingController emailEditController = TextEditingController();
   final TextEditingController passwordEditController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+  }
 
-  LoginScreen({super.key});
+  @override
+  void dispose() {
+    emailEditController.dispose();
+    passwordEditController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Login')),
-        body: SingleChildScrollView(
+        // appBar: AppBar(
+        //     leading: BackButton(onPressed: (){Navigator.pop(context);}),
+        //     ),
+        body: Center(
+            child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const HeroWidget(),
+                // const HeroWidget(),
+                Lottie.asset('assets/animations/login.json', height: 300),
+                const FittedBox(
+                  child: Text('Easy English',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 45.0,
+                          letterSpacing: 18)),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 TextField(
                   controller: emailEditController,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                  ),
+                  decoration: InputDecoration(
+                      hintText: 'Email',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
                 ),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 10.0),
                 TextField(
                   controller: passwordEditController,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                  ),
+                  decoration: InputDecoration(
+                      hintText: 'Password',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
                 ),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 10.0),
                 ElevatedButton(
                   onPressed: () async {
-                    final email = emailEditController.text;
-                    final password = passwordEditController.text;
-
-                    final AuthenticationResult result =
-                        await authProvider.login(email, password);
-
-                    if (result.success) {
-                      Navigator.pushReplacementNamed(
-                          context,
-                          AppRoutes.home
-                              .toString()); //AppRoutes.quizList.toString());
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(result.errorMessage),
-                        ),
-                      );
-                    }
+                    onLoginPress();
                   },
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 40.0)),
                   child: const Text('Login'),
                 ),
-                ElevatedButton(
+                TextButton(
                   onPressed: () {
                     Navigator.pushReplacementNamed(
-                        context, AppRoutes.register.toString());
+                        context, AppRoutes.register);
                   },
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 40.0)),
                   child: const Text('Create an account'),
                 ),
               ],
             ),
           ),
-        ));
+        )));
+  }
+
+  void onLoginPress() async {
+    final email = emailEditController.text;
+    final password = passwordEditController.text;
+
+    final AuthenticationResult result =
+        await authProvider.login(email, password);
+
+    if (result.success) {
+      // Navigator.pushReplacementNamed(
+      //     context, AppRoutes.home.toString());
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {return const Home(title: 'Welcome');}), (route) => false);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(result.errorMessage),
+        ),
+      );
+    }
   }
 }

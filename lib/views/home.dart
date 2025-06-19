@@ -13,7 +13,7 @@ import 'package:quizflutter/views/setting_page.dart';
 import 'package:quizflutter/views/websocket/chat_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-List<Widget> pages = [const QuizListScreen(), const ProfilePage()];
+List<Widget> pages = [const ProfilePage(), const ProfilePage()];
 
 class Home extends StatefulWidget {
   final String title;
@@ -169,14 +169,18 @@ class HomeState extends State<Home> {
       ])),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Center(child: Text('Welcome ')),
-            ValueListenableBuilder(
-              valueListenable: selectedPageNotifier,
-              builder: (context, selectedPage, child) {
-                return pages.elementAt(selectedPage);
-              },
-            ),
+            // const Center(child: Text('Welcome ')),
+            SizedBox(
+              height: 500,
+              child: ValueListenableBuilder(
+                valueListenable: selectedPageNotifier,
+                builder: (context, selectedPage, child) {
+                  return pages.elementAt(selectedPage);
+                },
+              ),
+            )
           ],
         ),
       ),

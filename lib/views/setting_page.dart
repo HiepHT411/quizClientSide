@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:quizflutter/components/hero_widget.dart';
+import 'package:quizflutter/constants/constants.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key, required this.title});
@@ -51,7 +52,7 @@ class SettingPageState extends State<SettingPage> {
                 decoration: InputDecoration(border: OutlineInputBorder()),
                 onEditingComplete: () => setState(() {}),
               ),
-              Text(dumController.text),
+              Text(dumController.text, style: Constants.titleTealText,),
               CheckboxListTile.adaptive(
                   value: isChecked,
                   tristate: true,
@@ -89,7 +90,7 @@ class SettingPageState extends State<SettingPage> {
                       height: 200,
                       width: double.infinity,
                       color: Colors.white12,
-                      child: const HeroWidget())),
+                      child: HeroWidget(title: 'Test'))),
               ElevatedButton(
                   onPressed: () {}, child: Text('default elevated button')),
               ElevatedButton(
@@ -99,11 +100,57 @@ class SettingPageState extends State<SettingPage> {
                     backgroundColor: Colors.teal,
                     foregroundColor: Colors.white,
                   )),
+              ElevatedButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Snackbar hehe'),
+                        behavior: SnackBarBehavior.floating,
+                        duration: Duration(seconds: 5),
+                      ),
+                    );
+                  },
+                  child: const Text('Open Snackbar')),
+              const Divider(color: Colors.teal, thickness: 3.0, endIndent: 250.0,),
+              ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          // return const AboutDialog(); 
+                          return AlertDialog(
+                              content: const Text('Alert content'),
+                              title: const Text('Alert title'),
+                              actions: [
+                                FilledButton(onPressed: () {Navigator.pop(context);}, child: const Text('Close'))
+                              ],);
+                        });
+                  },
+                  child: const Text('Open Dialog')),
+              const SizedBox(
+                height: 50,
+                child: VerticalDivider(),
+              ),
               FilledButton(
                   onPressed: () {}, child: const Text('Filled Button')),
               TextButton(onPressed: () {}, child: const Text('Text button')),
               OutlinedButton(
                   onPressed: () {}, child: const Text('Outline Button')),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: const Card(
+                  child: Padding(padding: EdgeInsets.all(20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Header', style: Constants.titleTealText),
+                          Text('Description', style: Constants.descText)
+                        ],
+                      ),
+                  ),
+                ),
+              ),
               CloseButton(),
               BackButton()
             ],

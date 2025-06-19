@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quizflutter/constants/app_routes.dart';
 import 'package:quizflutter/utility/notifier.dart';
 import 'package:quizflutter/views/auth/login_screen.dart';
+import 'package:quizflutter/views/auth/register_screen.dart';
 import 'package:quizflutter/views/home.dart';
 
 void main() {
@@ -26,8 +27,9 @@ class _MyAppState extends State<MyApp> {
             title: 'HoangHiep',
             initialRoute: AppRoutes.home,
             routes: {
-              AppRoutes.login: (context) => LoginScreen(),
+              AppRoutes.login: (context) => const LoginScreen(),
               AppRoutes.home: (context) => const Home(title: 'Welcome'),
+              AppRoutes.register: (context) => const RegisterScreen()
             },
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(

@@ -16,10 +16,10 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(20.0),
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
       child: Column(
-        children: [HeroWidget()],
+        children: [HeroWidget(title: 'Profile',)],
       ),
     );
   }

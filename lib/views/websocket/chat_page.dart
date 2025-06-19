@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:quizflutter/constants/api_endpoints.dart';
 import 'package:quizflutter/views/websocket/ws_message.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -8,7 +9,7 @@ class ChatPage extends StatefulWidget {
   final String title;
   final String username;
   ChatPage({super.key, required this.title, required this.username});
-  final channel = WebSocketChannel.connect(Uri.parse('ws://127.0.0.1:3000/ws/quiz'));
+  final channel = WebSocketChannel.connect(Uri.parse(WS_URL));
 
 
   @override
