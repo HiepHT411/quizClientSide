@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Constants {
+  static const String themeModeKey = 'themeModeDark';
+
   static const TextStyle titleTealText = TextStyle(
     color: Colors.teal,
     fontSize: 18.0,

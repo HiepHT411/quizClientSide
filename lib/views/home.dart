@@ -5,6 +5,7 @@ import 'package:quizflutter/components/AppRouting.dart';
 import 'package:quizflutter/components/hero_widget.dart';
 import 'package:quizflutter/components/navbar_widget.dart';
 import 'package:quizflutter/constants/app_routes.dart';
+import 'package:quizflutter/constants/constants.dart';
 import 'package:quizflutter/utility/notifier.dart';
 import 'package:quizflutter/views/auth/login_screen.dart';
 import 'package:quizflutter/views/profile.dart';
@@ -89,7 +90,12 @@ class HomeState extends State<Home> {
                 icon: const Icon(Icons.menu));
           }),
         actions: [
-          IconButton(onPressed: () {isDarkModeNotifier.value = !isDarkModeNotifier.value;},
+          IconButton(
+              onPressed: () async {
+                isDarkModeNotifier.value = !isDarkModeNotifier.value;
+                final SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.setBool(Constants.themeModeKey, isDarkModeNotifier.value);
+              },
               icon: ValueListenableBuilder(
                   valueListenable: isDarkModeNotifier,
                   builder: (context, isDarkMode, child) {
