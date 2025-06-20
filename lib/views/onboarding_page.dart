@@ -16,6 +16,8 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingState extends State<OnboardingPage> {
+  bool isFirst = true;
+
   @override
   Widget build(BuildContext context) {
     List<String> listContainer = [Headers.keyConcepts, Headers.basicLayout, Headers.cleanUI, Headers.fixBugs];
@@ -31,7 +33,25 @@ class _OnboardingState extends State<OnboardingPage> {
               ),
               ...List.generate(listContainer.length, (index)  {
                 return ContainerWidget(title: listContainer.elementAt(index), description: 'Sample description');
-              })
+              }),
+              Padding(padding: const EdgeInsets.all(16.0),
+                child: AnimatedCrossFade(
+                    firstChild: Center(
+                      child: Image.asset('assets/images/quizapplogo.png'),
+                    ),
+                    secondChild: Center(
+                      child: Image.asset('assets/images/bg.png'),
+                    ),
+                    crossFadeState: isFirst ? CrossFadeState.showSecond : CrossFadeState.showSecond,
+                    duration: const Duration(milliseconds: 300)),
+              ),
+              IconButton(onPressed: () {
+                setState(() {
+                  isFirst = !isFirst;
+
+                });
+                  },
+                  icon: const Icon(Icons.refresh))
             ],
           ),
         ));

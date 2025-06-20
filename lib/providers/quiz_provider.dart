@@ -33,12 +33,14 @@ class QuizProvider with ChangeNotifier {
       log("Success retrieved data: $data");
       for (dynamic quiz in data) {
         int id = quiz['id'];
-        Quiz tmpQuiz = Quiz(
-            id, quiz['title'], quiz['description'], (quiz['questions'] as List<dynamic>).map((ques) => Question(
-                ques['id'], id, ques['prompt'], true, (ques['answers'] as List<dynamic>).map((ans) => Answer(id: ans['id'], text: ans['text'], correct:  ans['correct'])).toList()
-              )
-            ).toList()
-        );
+        //use Class.fromJson(jsonDecode(quiz['id']) as Map<String, dynamic>)
+        Quiz tmpQuiz = Quiz.fromJson(quiz);
+        // Quiz(
+        //     id, quiz['title'], quiz['description'], (quiz['questions'] as List<dynamic>).map((ques) => Question(
+        //         ques['id'], id, ques['prompt'], true, (ques['answers'] as List<dynamic>).map((ans) => Answer(id: ans['id'], text: ans['text'], correct:  ans['correct'])).toList()
+        //       )
+        //     ).toList()
+        // );
         quizzes.add(tmpQuiz);
       }
       notifyListeners();
@@ -63,12 +65,13 @@ class QuizProvider with ChangeNotifier {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       notifyListeners();
-      return Quiz(
-        data['id'], data['title'], data['description'], (data['questions'] as List<dynamic>)
-            .map((json) => Question(json['id'], data['id'], json['prompt'], true, (json['answers'] as List<dynamic>)
-              .map((json) => Answer(id : json['id'], text: json['text'], correct:  json['correct'])).toList()
-        )).toList(),
-      );
+      return Quiz.fromJson(data);
+      //return Quiz(
+      //   data['id'], data['title'], data['description'], (data['questions'] as List<dynamic>)
+      //       .map((json) => Question(json['id'], data['id'], json['prompt'], true, (json['answers'] as List<dynamic>)
+      //         .map((json) => Answer(id : json['id'], text: json['text'], correct:  json['correct'])).toList()
+      //   )).toList(),
+      // );
     } else {
       log('Failed to update quiz: ${response.statusCode}');
       throw Exception('Failed to update quiz');
@@ -91,11 +94,12 @@ class QuizProvider with ChangeNotifier {
     if (response.statusCode == 201) {
       final data = jsonDecode(response.body);
       notifyListeners();
-      return Quiz(data['id'], data['title'], data['description'], (data['questions'] as List<dynamic>)
-            .map((json) => Question(json['id'], data['id'], json['prompt'], true, (json['answers'] as List<dynamic>)
-              .map((json) => Answer(id : json['id'], text: json['text'], correct:  json['correct'])).toList(),
-            )).toList(),
-      );
+      return Quiz.fromJson(data);
+      // return Quiz(data['id'], data['title'], data['description'], (data['questions'] as List<dynamic>)
+      //       .map((json) => Question(json['id'], data['id'], json['prompt'], true, (json['answers'] as List<dynamic>)
+      //         .map((json) => Answer(id : json['id'], text: json['text'], correct:  json['correct'])).toList(),
+      //       )).toList(),
+      // );
     } else {
       log('Failed to add question: ${response.statusCode}');
       throw Exception('Failed to add question');
@@ -117,11 +121,12 @@ class QuizProvider with ChangeNotifier {
     if (response.statusCode == 201) {
       final data = jsonDecode(response.body);
       notifyListeners();
-      return Quiz(data['id'], data['title'], data['description'], (data['questions'] as List<dynamic>)
-          .map((json) => Question(json['id'], data['id'], json['prompt'], true, (json['answers'] as List<dynamic>)
-          .map((json) => Answer(id : json['id'], text: json['text'], correct:  json['correct'])).toList(),
-      )).toList(),
-      );
+      return Quiz.fromJson(data);
+      // return Quiz(data['id'], data['title'], data['description'], (data['questions'] as List<dynamic>)
+      //     .map((json) => Question(json['id'], data['id'], json['prompt'], true, (json['answers'] as List<dynamic>)
+      //     .map((json) => Answer(id : json['id'], text: json['text'], correct:  json['correct'])).toList(),
+      // )).toList(),
+      // );
     } else {
       log('Failed to add quiz: ${response.statusCode}');
       throw Exception('Failed to add quiz');
@@ -146,11 +151,12 @@ class QuizProvider with ChangeNotifier {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       notifyListeners();
-      return Quiz(data['id'], data['title'], data['description'], (data['questions'] as List<dynamic>)
-          .map((json) => Question(json['id'], data['id'], json['prompt'], true, (json['answers'] as List<dynamic>)
-          .map((json) => Answer(id : json['id'], text: json['text'], correct:  json['correct'])).toList(),
-      )).toList(),
-      );
+      return Quiz.fromJson(data);
+      // return Quiz(data['id'], data['title'], data['description'], (data['questions'] as List<dynamic>)
+      //     .map((json) => Question(json['id'], data['id'], json['prompt'], true, (json['answers'] as List<dynamic>)
+      //     .map((json) => Answer(id : json['id'], text: json['text'], correct:  json['correct'])).toList(),
+      // )).toList(),
+      // );
     } else {
       log('Failed to update question: ${response.statusCode}');
       throw Exception('Failed to update question');

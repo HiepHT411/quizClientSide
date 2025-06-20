@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:quizflutter/constants/app_routes.dart';
 import 'package:quizflutter/main.dart';
@@ -19,6 +21,7 @@ import 'package:quizflutter/views/setting_page.dart';
 import 'package:quizflutter/views/websocket/chat_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+//Deprecated
 class RoutingApp extends StatelessWidget {
   const RoutingApp({super.key});
   static String username = "";
@@ -38,7 +41,19 @@ class RoutingApp extends StatelessWidget {
       return AppRoutes.login;
     }
   }
+/* Another Material App could be considered as 2 completely isolated stacks
+  MaterialApp is intended to be the top-level widget that provides:
+    Navigation stack (Navigator)
+    Themes
+    Localization
+    Route management
+    Scaffold structure
 
+  If you have two MaterialApp widgets:
+    You will have two completely isolated navigation stacks.
+    The second MaterialApp will not know about the routes in the first.
+    Navigator.pushNamed(context, route) will fail if the context is from a different navigation stack.
+ */
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

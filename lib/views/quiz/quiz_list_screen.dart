@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quizflutter/constants/app_routes.dart';
 import 'package:quizflutter/models/quiz.dart';
 import 'package:quizflutter/providers/quiz_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class QuizListScreen extends StatefulWidget {
 
@@ -15,21 +16,23 @@ class QuizListScreen extends StatefulWidget {
 
 class _QuizListScreenState extends State<QuizListScreen> {
 
-  List<Quiz> quizzes = [];
+  late List<Quiz> quizzes;
 
 
   @override
   void initState() {
-    super.initState();
     loadQuizzes();
+    super.initState();
   }
 
-  Future<void> loadQuizzes() async {
+  Future loadQuizzes() async {
     final quizProvider = QuizProvider();
     await quizProvider.fetchQuizzes();
-    setState(() {
-      quizzes = quizProvider.quizzes;
-    });
+    // setState(() {
+    //   quizzes = quizProvider.quizzes;
+    // });
+    quizzes = quizProvider.quizzes;
+    return quizzes;
   }
 
   @override
@@ -46,7 +49,10 @@ class _QuizListScreenState extends State<QuizListScreen> {
           ),
           IconButton(
             icon: const Icon(Icons.logout),
-            onPressed: () {
+            onPressed: () async {
+              final SharedPreferences prefs = await SharedPreferences.getInstance() ;
+              prefs.remove('email');
+              prefs.remove('accessToken');
               Navigator.pushReplacementNamed(
                   context, AppRoutes.login.toString());
             },
@@ -54,7 +60,21 @@ class _QuizListScreenState extends State<QuizListScreen> {
           )
         ],
       ),
-      body: buildQuizList(quizzes),
+      body: FutureBuilder(
+          future: loadQuizzes(),
+          builder: (context, AsyncSnapshot snapshot) {
+            Widget widget;
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              widget = const CircularProgressIndicator();
+            }
+            if (snapshot.hasData) {
+              widget = buildQuizList(snapshot.data);
+            } else {
+              widget =  const Center(child: Text('Error Occurred'),);
+            }
+            return widget;
+          }
+      ),
       floatingActionButton: FloatingActionButton(
         tooltip: "Add Quiz",
         onPressed: addQuiz,
@@ -111,7 +131,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
           subtitle: Text(quiz.description),
           onTap: () async {
             Quiz tmpQuiz = await Navigator.pushNamed(
-                context, AppRoutes.quizDetail.toString(), arguments: quiz)
+                context, AppRoutes.quizDetail, arguments: quiz)
             as Quiz;
             setState(
                   () {

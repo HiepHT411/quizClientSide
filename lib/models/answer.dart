@@ -11,4 +11,12 @@ class Answer {
       'correct': correct
     };
   }
+
+  factory Answer.fromJson(Map<String, dynamic> json) {
+    return Answer(
+      id: json['id'] != null ? json['id'] as int : null,
+      text: json['text'] as String,
+      correct: json['correct'] as bool,
+    );
+  }
 }

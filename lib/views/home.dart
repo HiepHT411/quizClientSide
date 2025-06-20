@@ -162,8 +162,11 @@ class HomeState extends State<Home> {
         ),
             ListTile(
               title: const Text('Logout'),
-              onTap: () {
+              onTap: () async {
                 if (username.isNotEmpty) {
+                  final SharedPreferences prefs = await SharedPreferences.getInstance() ;
+                  prefs.remove('email');
+                  prefs.remove('accessToken');
                   Navigator.pushReplacementNamed(
                       context, AppRoutes.login);
                   // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  LoginScreen()));
