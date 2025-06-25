@@ -41,6 +41,7 @@ dependencies:
   lottie: ^3.2.0
   # change app launcher icon: 'dart run flutter_launcher_icons:generate' then edit flutter_launcher_icons.yaml
   flutter_launcher_icons: ^0.14.4
+  flutter_bloc: ^9.1.1
 
 dev_dependencies:
   flutter_test:
